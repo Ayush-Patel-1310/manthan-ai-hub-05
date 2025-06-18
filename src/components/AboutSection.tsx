@@ -38,7 +38,7 @@ const AboutSection = () => {
   return (
     <section id="about" className="py-20 bg-gradient-to-b from-white to-manthan-lavender/10">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="font-mono font-bold text-4xl lg:text-5xl text-manthan-deep-violet mb-6">
             About Manthan AI Hackathon
           </h2>
@@ -53,11 +53,11 @@ const AboutSection = () => {
           {features.map((feature, index) => (
             <div 
               key={feature.title}
-              className="p-6 bg-white rounded-xl border border-manthan-lavender/30 hover:border-manthan-violet/50 transition-all duration-300 hover:shadow-lg animate-fade-in"
+              className="p-6 bg-white rounded-xl border border-manthan-lavender/30 hover:border-manthan-violet/50 transition-all duration-300 hover:shadow-lg hover:scale-105 animate-fade-in group"
               style={{animationDelay: `${index * 0.1}s`}}
             >
-              <div className="w-12 h-12 bg-manthan-violet/10 rounded-lg flex items-center justify-center mb-4">
-                <feature.icon className="w-6 h-6 text-manthan-violet" />
+              <div className="w-12 h-12 bg-manthan-violet/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-manthan-violet/20 transition-colors duration-300">
+                <feature.icon className="w-6 h-6 text-manthan-violet group-hover:scale-110 transition-transform duration-300" />
               </div>
               <h3 className="font-mono font-semibold text-xl text-manthan-deep-violet mb-3">
                 {feature.title}
@@ -69,7 +69,7 @@ const AboutSection = () => {
           ))}
         </div>
 
-        <div className="bg-gradient-to-r from-manthan-violet to-manthan-deep-violet rounded-2xl p-8 text-white text-center">
+        <div className="bg-gradient-to-r from-manthan-violet to-manthan-deep-violet rounded-2xl p-8 text-white text-center animate-fade-in hover:scale-105 transition-transform duration-500">
           <h3 className="font-mono font-bold text-2xl mb-4">
             Why AI? Why Now?
           </h3>

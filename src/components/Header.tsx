@@ -23,15 +23,15 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-manthan-lavender/20">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-manthan-lavender/20 animate-fade-in">
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
             <img 
               src="/lovable-uploads/d760ab7f-a4ad-46bc-9dce-26c6d263cca7.png" 
               alt="Manthan AI Hackathon" 
-              className="w-10 h-10"
+              className="w-10 h-10 hover:rotate-12 transition-transform duration-300"
             />
             <div>
               <h1 className="font-mono font-bold text-xl text-manthan-deep-violet">
@@ -49,7 +49,7 @@ const Header = () => {
               <button
                 key={item.name}
                 onClick={() => scrollToSection(item.href)}
-                className="font-sans text-manthan-dark-text hover:text-manthan-violet transition-colors duration-200"
+                className="font-sans text-manthan-dark-text hover:text-manthan-violet transition-all duration-300 hover:scale-110 relative after:content-[''] after:absolute after:w-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-manthan-violet after:transition-all after:duration-300 hover:after:w-full"
               >
                 {item.name}
               </button>
@@ -60,7 +60,7 @@ const Header = () => {
           <Button
             variant="ghost"
             size="sm"
-            className="md:hidden"
+            className="md:hidden hover:scale-110 transition-transform duration-300"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -69,13 +69,14 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 border-t border-manthan-lavender/20">
+          <nav className="md:hidden mt-4 pb-4 border-t border-manthan-lavender/20 animate-fade-in">
             <div className="flex flex-col space-y-3 pt-4">
-              {navItems.map((item) => (
+              {navItems.map((item, index) => (
                 <button
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
-                  className="font-sans text-manthan-dark-text hover:text-manthan-violet transition-colors duration-200 text-left"
+                  className="font-sans text-manthan-dark-text hover:text-manthan-violet transition-all duration-300 text-left hover:translate-x-2 animate-fade-in"
+                  style={{animationDelay: `${index * 0.1}s`}}
                 >
                   {item.name}
                 </button>
