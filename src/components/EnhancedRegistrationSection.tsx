@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Users, Mail, User, Phone, Code, GraduationCap, Download, Edit, Upload, CheckCircle, Circle } from 'lucide-react';
+import { Users, Mail, User, Phone, Code, GraduationCap, Download, Edit, Upload, CheckCircle } from 'lucide-react';
 
 interface TeamMember {
   name: string;
@@ -165,6 +165,8 @@ const EnhancedRegistrationSection = () => {
     setIsSubmitting(false);
   };
 
+  const StepIcon = steps[currentStep - 1].icon;
+
   return (
     <section id="register" className="py-20 bg-gradient-to-b from-white to-manthan-lavender/10">
       <div className="container mx-auto px-4">
@@ -221,7 +223,7 @@ const EnhancedRegistrationSection = () => {
             /* Steps 1 & 2: Download and Edit */
             <div className="bg-white rounded-2xl border border-manthan-lavender/30 p-8 shadow-lg text-center">
               <div className="w-20 h-20 bg-manthan-violet/10 rounded-full flex items-center justify-center mx-auto mb-6">
-                {React.createElement(steps[currentStep - 1].icon, { className: "w-10 h-10 text-manthan-violet" })}
+                <StepIcon className="w-10 h-10 text-manthan-violet" />
               </div>
               
               <h3 className="font-mono font-bold text-2xl text-manthan-deep-violet mb-4">
@@ -239,7 +241,7 @@ const EnhancedRegistrationSection = () => {
                 onClick={() => handleStepAction(currentStep)}
                 className="bg-manthan-violet hover:bg-manthan-dark-lavender text-white font-mono font-semibold px-8 py-4 text-lg rounded-xl hover:scale-105 transition-all duration-300"
               >
-                <steps[currentStep - 1].icon className="w-5 h-5 mr-2" />
+                <StepIcon className="w-5 h-5 mr-2" />
                 {steps[currentStep - 1].action}
               </Button>
 
