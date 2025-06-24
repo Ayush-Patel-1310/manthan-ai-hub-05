@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,11 +27,9 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
-            <img 
-              src="/lovable-uploads/d760ab7f-a4ad-46bc-9dce-26c6d263cca7.png" 
-              alt="Manthan AI Hackathon" 
-              className="w-10 h-10 hover:rotate-12 transition-transform duration-300"
-            />
+            <div className="w-10 h-10 bg-gradient-to-br from-manthan-violet to-manthan-deep-violet rounded-xl flex items-center justify-center hover:rotate-12 transition-transform duration-300">
+              <span className="text-white font-mono font-bold text-lg">M</span>
+            </div>
             <div>
               <h1 className="font-mono font-bold text-xl text-manthan-deep-violet">
                 Manthan

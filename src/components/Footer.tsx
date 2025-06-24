@@ -1,19 +1,17 @@
 
-import { Mail, MapPin, Calendar, ExternalLink, TrendingUp, Users, Zap } from 'lucide-react';
+import { Mail, MapPin, Calendar, Zap, Users } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-manthan-violet via-manthan-deep-violet to-manthan-violet text-white py-20">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Logo and Description - Enhanced */}
-          <div className="lg:col-span-2">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {/* Logo and Description */}
+          <div>
             <div className="flex items-center space-x-4 mb-8">
-              <img 
-                src="/lovable-uploads/d760ab7f-a4ad-46bc-9dce-26c6d263cca7.png" 
-                alt="Manthan AI Hackathon" 
-                className="w-16 h-16 hover:rotate-12 transition-transform duration-300"
-              />
+              <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center hover:rotate-12 transition-transform duration-300">
+                <span className="text-white font-mono font-bold text-2xl">M</span>
+              </div>
               <div>
                 <h3 className="font-mono font-bold text-3xl bg-gradient-to-r from-white to-manthan-lavender bg-clip-text text-transparent">
                   AI Manthan
@@ -78,7 +76,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Event Info - Enhanced */}
+          {/* Event Info */}
           <div>
             <h4 className="font-mono font-bold text-xl mb-8 text-manthan-lavender">Event Info</h4>
             <div className="space-y-6">
@@ -128,64 +126,7 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Enhanced Important Information */}
-        <div className="mt-16 pt-8 border-t border-white/20">
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h4 className="font-mono font-bold text-xl mb-6 text-manthan-lavender">Prizes & Recognition</h4>
-              <ul className="font-sans space-y-3 text-white/90">
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></span>
-                  1st Place: ₹2,00,000 + Mentorship Program
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-gray-400 rounded-full mr-3"></span>
-                  2nd Place: ₹1,50,000 + Industry Internships
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-orange-400 rounded-full mr-3"></span>
-                  3rd Place: ₹1,00,000 + Tech Swag Package
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-manthan-lavender rounded-full mr-3"></span>
-                  Special category awards for innovation
-                </li>
-                <li className="flex items-center">
-                  <span className="w-2 h-2 bg-green-400 rounded-full mr-3"></span>
-                  All participants receive certificates
-                </li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="font-mono font-bold text-xl mb-6 text-manthan-lavender">Important Guidelines</h4>
-              <ul className="font-sans space-y-3 text-white/90">
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-manthan-lavender rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  Registration deadline: March 25, 2024
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-manthan-lavender rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  Teams must have 2-4 members with diverse skills
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-manthan-lavender rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  All skill levels welcome - beginners to experts
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-manthan-lavender rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  Complete meals and accommodation provided
-                </li>
-                <li className="flex items-start">
-                  <span className="w-2 h-2 bg-manthan-lavender rounded-full mr-3 mt-2 flex-shrink-0"></span>
-                  Bring your laptop, charger, and innovative mindset!
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Enhanced Copyright */}
+        {/* Copyright */}
         <div className="mt-16 pt-8 border-t border-white/20 text-center">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <p className="font-sans text-white/80 mb-4 md:mb-0">
