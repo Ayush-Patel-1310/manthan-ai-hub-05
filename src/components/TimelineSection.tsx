@@ -5,40 +5,43 @@ const TimelineSection = () => {
   const schedule = [
     {
       day: "Day 1 - March 1",
+      gradient: "bg-gradient-to-br from-purple-500 via-pink-500 to-red-500",
       events: [
-        "09:00 - Registration & Breakfast",
-        "10:00 - Opening Ceremony", 
-        "11:00 - Keynote: Future of AI",
-        "12:00 - Team Formation & Ideation",
-        "13:00 - Lunch Break",
-        "14:00 - Coding Begins",
-        "16:00 - Mentor Office Hours",
-        "20:00 - Dinner & Networking"
+        "Registration & Breakfast",
+        "Opening Ceremony", 
+        "Keynote: Future of AI",
+        "Team Formation & Ideation",
+        "Lunch Break",
+        "Coding Begins",
+        "Mentor Office Hours",
+        "Dinner & Networking"
       ]
     },
     {
       day: "Day 2 - March 2",
+      gradient: "bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500",
       events: [
-        "08:00 - Breakfast & Coffee",
-        "09:00 - AI/ML Workshop Session",
-        "11:00 - Development Sprint",
-        "13:00 - Lunch Break",
-        "14:00 - Mentorship Rounds",
-        "16:00 - Technical Check-ins",
-        "18:00 - Dinner Break",
-        "20:00 - Final Development Push"
+        "Breakfast & Coffee",
+        "AI/ML Workshop Session",
+        "Development Sprint",
+        "Lunch Break",
+        "Mentorship Rounds",
+        "Technical Check-ins",
+        "Dinner Break",
+        "Final Development Push"
       ]
     },
     {
       day: "Day 3 - March 3",
+      gradient: "bg-gradient-to-br from-green-500 via-emerald-500 to-lime-500",
       events: [
-        "08:00 - Final Breakfast",
-        "09:00 - Project Finalization",
-        "10:00 - Code Freeze & Submission",
-        "11:00 - Team Presentations",
-        "14:00 - Judging & Deliberation",
-        "16:00 - Awards Ceremony",
-        "17:00 - Closing & Networking"
+        "Final Breakfast",
+        "Project Finalization",
+        "Code Freeze & Submission",
+        "Team Presentations",
+        "Judging & Deliberation",
+        "Awards Ceremony",
+        "Closing & Networking"
       ]
     }
   ];
@@ -59,28 +62,36 @@ const TimelineSection = () => {
           {schedule.map((day, dayIndex) => (
             <div 
               key={day.day}
-              className="bg-white border-2 border-manthan-lavender/30 rounded-2xl p-6 hover:shadow-xl transition-all duration-300 animate-fade-in group hover:scale-105"
+              className="relative overflow-hidden rounded-2xl hover:shadow-2xl transition-all duration-300 animate-fade-in group hover:scale-105"
               style={{animationDelay: `${dayIndex * 0.2}s`}}
             >
-              <div className="flex items-center justify-center mb-6">
-                <Calendar className="w-8 h-8 text-manthan-violet mr-3" />
-                <h3 className="font-mono font-bold text-xl text-manthan-deep-violet">
-                  {day.day}
-                </h3>
-              </div>
-              
-              <div className="space-y-3">
-                {day.events.map((event, eventIndex) => (
-                  <div 
-                    key={eventIndex}
-                    className="flex items-start space-x-3 text-left"
-                  >
-                    <div className="w-2 h-2 bg-manthan-violet rounded-full mt-2 flex-shrink-0"></div>
-                    <p className="font-sans text-manthan-dark-text leading-relaxed">
-                      {event}
-                    </p>
+              {/* Gradient Background */}
+              <div className={`${day.gradient} p-6 relative`}>
+                {/* Overlay for better text readability */}
+                <div className="absolute inset-0 bg-black/20"></div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-center mb-6">
+                    <Calendar className="w-8 h-8 text-white mr-3" />
+                    <h3 className="font-mono font-bold text-xl text-white">
+                      {day.day}
+                    </h3>
                   </div>
-                ))}
+                  
+                  <div className="space-y-3">
+                    {day.events.map((event, eventIndex) => (
+                      <div 
+                        key={eventIndex}
+                        className="flex items-start space-x-3 text-left"
+                      >
+                        <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
+                        <p className="font-sans text-white leading-relaxed font-medium">
+                          {event}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           ))}
