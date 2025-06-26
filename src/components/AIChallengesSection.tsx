@@ -170,7 +170,7 @@ const AIChallengesSection = () => {
                           </span>
                         ))}
                       </div>
-                      <div className="flex flex-wrap gap-1">
+                      {/* <div className="flex flex-wrap gap-1">
                         {challenge.technologies.slice(0, 2).map((tech, idx) => (
                           <span 
                             key={idx}
@@ -179,7 +179,7 @@ const AIChallengesSection = () => {
                             {tech}
                           </span>
                         ))}
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

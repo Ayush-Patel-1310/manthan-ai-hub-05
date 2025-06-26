@@ -24,7 +24,7 @@ const Footer = () => {
               Join us in shaping the future of artificial intelligence. AI Manthan is more than just a hackathon – it's a movement towards creating AI solutions that make the world a better place for everyone.
             </p>
 
-            {/* Technology Tags */}
+            {/* Technology Tags
             <div className="mb-8">
               <div className="flex flex-wrap gap-3">
                 <span className="bg-white/20 text-manthan-lavender px-4 py-2 rounded-full text-sm font-mono border border-white/30">
@@ -37,9 +37,9 @@ const Footer = () => {
                   Neural Networks
                 </span>
               </div>
-            </div>
+            </div> */}
 
-            {/* Social Links */}
+            Social Links
             <div className="flex space-x-6">
               <a href="#" className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110 border border-white/30">
                 <span className="font-sans text-sm font-semibold">G</span>
@@ -65,14 +65,14 @@ const Footer = () => {
                 <Calendar className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 <span className="font-sans">Timeline</span>
               </a>
-              <a href="#schedule" className="flex items-center text-white hover:text-manthan-lavender transition-colors group">
-                <Calendar className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-300" />
-                <span className="font-sans">Schedule</span>
-              </a>
               <a href="#register" className="flex items-center text-white hover:text-manthan-lavender transition-colors group">
                 <Users className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 <span className="font-sans">Register</span>
               </a>
+              {/* <a href="#schedule" className="flex items-center text-white hover:text-manthan-lavender transition-colors group">
+                <Calendar className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-300" />
+                <span className="font-sans">Schedule</span>
+              </a> */}
             </div>
           </div>
 
@@ -106,7 +106,7 @@ const Footer = () => {
             </div>
 
             {/* AI Impact Stats */}
-            <div className="mt-8 p-4 bg-white/10 rounded-lg border border-white/20">
+            {/* <div className="mt-8 p-4 bg-white/10 rounded-lg border border-white/20">
               <h5 className="font-mono font-bold text-manthan-lavender mb-3">AI Impact</h5>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
@@ -122,7 +122,7 @@ const Footer = () => {
                   <span className="font-bold text-manthan-lavender">50+</span>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
@@ -130,7 +130,7 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-white/20 text-center">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <p className="font-sans text-white/80 mb-4 md:mb-0">
-              © 2024 AI Manthan. All rights reserved. Powered by AI, built with ❤️ for innovation.
+              © 2024 AI Manthan. All rights reserved. Powered by AI, built with ❤️ by AtliQ.
             </p>
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-manthan-lavender hover:text-white transition-colors">Privacy Policy</a>
