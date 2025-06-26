@@ -4,12 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useToast } from '@/hooks/use-toast';
 import { Download, Upload } from 'lucide-react';
+import { useRegistration } from '@/hooks/useRegistration';
 
 const EnhancedRegistrationSection = () => {
-  const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { submitRegistration, isSubmitting } = useRegistration();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [problemStatement, setProblemStatement] = useState('');
@@ -21,22 +20,13 @@ const EnhancedRegistrationSection = () => {
     link.href = 'data:text/plain;charset=utf-8,# Manthan AI Hackathon Proposal Template%0A%0A## Team Information%0ATeam Name: %0ATeam Size: %0A%0A## Problem Statement%0ASelected Challenge: %0A%0A## Solution Overview%0ADescribe your AI solution approach...%0A%0A## Technical Implementation%0AList key technologies and tools...%0A%0A## Expected Impact%0ADescribe the potential impact...';
     link.download = 'manthan-proposal-template.txt';
     link.click();
-    
-    toast({
-      title: "Template Downloaded! 📥",
-      description: "Proposal template has been downloaded successfully.",
-    });
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedFile(file);
-      setErrors(prev => ({ ...prev, file: '' }));
-      toast({
-        title: "File Uploaded! 📄",
-        description: `${file.name} has been uploaded successfully.`,
-      });
+      if (errors.file) setErrors(prev => ({ ...prev, file: '' }));
     }
   };
 
@@ -69,31 +59,24 @@ const EnhancedRegistrationSection = () => {
     e.preventDefault();
     
     if (!validateForm()) {
-      toast({
-        title: "Validation Error",
-        description: "Please fill in all required fields and upload your proposal.",
-        variant: "destructive",
-      });
       return;
     }
 
-    setIsSubmitting(true);
-
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    toast({
-      title: "Registration Successful! 🎉",
-      description: `Your registration has been submitted successfully. Check your email for confirmation details.`,
+    const result = await submitRegistration({
+      name,
+      email,
+      problem_statement: problemStatement,
+      proposal_file: uploadedFile!
     });
 
-    // Reset form
-    setName('');
-    setEmail('');
-    setProblemStatement('');
-    setUploadedFile(null);
-    setErrors({});
-    setIsSubmitting(false);
+    if (result.success) {
+      // Reset form
+      setName('');
+      setEmail('');
+      setProblemStatement('');
+      setUploadedFile(null);
+      setErrors({});
+    }
   };
 
   return (
