@@ -18,9 +18,9 @@ export const useRegistration = () => {
     setIsSubmitting(true);
     
     try {
-      // Generate unique filename
+      // Generate filename using email and original file extension
       const fileExtension = data.proposal_file.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExtension}`;
+      const fileName = `${data.email}.${fileExtension}`;
       
       // Upload file to storage
       const { data: uploadData, error: uploadError } = await supabase.storage
