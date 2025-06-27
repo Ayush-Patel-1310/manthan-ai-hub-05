@@ -1,5 +1,4 @@
-
-import { Mail, MapPin, Calendar, Zap, Users } from 'lucide-react';
+import { Mail, MapPin, Calendar, Zap, Users, Github, Linkedin, Twitter } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -24,31 +23,16 @@ const Footer = () => {
               Join us in shaping the future of artificial intelligence. AI Manthan is more than just a hackathon – it's a movement towards creating AI solutions that make the world a better place for everyone.
             </p>
 
-            {/* Technology Tags
-            <div className="mb-8">
-              <div className="flex flex-wrap gap-3">
-                <span className="bg-white/20 text-manthan-lavender px-4 py-2 rounded-full text-sm font-mono border border-white/30">
-                  Deep Learning
-                </span>
-                <span className="bg-white/20 text-manthan-lavender px-4 py-2 rounded-full text-sm font-mono border border-white/30">
-                  Big Data
-                </span>
-                <span className="bg-white/20 text-manthan-lavender px-4 py-2 rounded-full text-sm font-mono border border-white/30">
-                  Neural Networks
-                </span>
-              </div>
-            </div> */}
-
-            Social Links
+            {/* Social Links */}
             <div className="flex space-x-6">
               <a href="#" className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110 border border-white/30">
-                <span className="font-sans text-sm font-semibold">G</span>
+                <Github className="w-5 h-5" />
               </a>
               <a href="#" className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110 border border-white/30">
-                <span className="font-sans text-sm font-semibold">L</span>
+                <Linkedin className="w-5 h-5" />
               </a>
               <a href="#" className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all duration-300 hover:scale-110 border border-white/30">
-                <span className="font-sans text-sm font-semibold">T</span>
+                <Twitter className="w-5 h-5" />
               </a>
             </div>
           </div>
@@ -69,10 +53,6 @@ const Footer = () => {
                 <Users className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-300" />
                 <span className="font-sans">Register</span>
               </a>
-              {/* <a href="#schedule" className="flex items-center text-white hover:text-manthan-lavender transition-colors group">
-                <Calendar className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-300" />
-                <span className="font-sans">Schedule</span>
-              </a> */}
             </div>
           </div>
 
@@ -104,25 +84,6 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-
-            {/* AI Impact Stats */}
-            {/* <div className="mt-8 p-4 bg-white/10 rounded-lg border border-white/20">
-              <h5 className="font-mono font-bold text-manthan-lavender mb-3">AI Impact</h5>
-              <div className="space-y-2 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-white/80">ML Models Expected:</span>
-                  <span className="font-bold text-manthan-lavender">200+</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/80">Data Points:</span>
-                  <span className="font-bold text-manthan-lavender">1M+</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-white/80">AI Solutions:</span>
-                  <span className="font-bold text-manthan-lavender">50+</span>
-                </div>
-              </div>
-            </div> */}
           </div>
         </div>
 

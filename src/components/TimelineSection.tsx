@@ -1,47 +1,44 @@
 
-import { Calendar } from 'lucide-react';
+import { Calendar, Clock } from 'lucide-react';
 
 const TimelineSection = () => {
   const schedule = [
     {
       day: "Day 1 - March 1",
-      gradient: "bg-gradient-to-br from-purple-500 via-pink-500 to-red-500",
       events: [
-        "Registration & Breakfast",
-        "Opening Ceremony", 
-        "Keynote: Future of AI",
-        "Team Formation & Ideation",
-        "Lunch Break",
-        "Coding Begins",
-        "Mentor Office Hours",
-        "Dinner & Networking"
+        { time: "09:00", activity: "Registration & Breakfast" },
+        { time: "10:00", activity: "Opening Ceremony" },
+        { time: "11:00", activity: "Keynote: Future of AI" },
+        { time: "12:00", activity: "Team Formation & Ideation" },
+        { time: "13:00", activity: "Lunch Break" },
+        { time: "14:00", activity: "Coding Begins" },
+        { time: "16:00", activity: "Mentor Office Hours" },
+        { time: "20:00", activity: "Dinner & Networking" }
       ]
     },
     {
-      day: "Day 2 - March 2",
-      gradient: "bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500",
+      day: "Day 2 - March 2", 
       events: [
-        "Breakfast & Coffee",
-        "AI/ML Workshop Session",
-        "Development Sprint",
-        "Lunch Break",
-        "Mentorship Rounds",
-        "Technical Check-ins",
-        "Dinner Break",
-        "Final Development Push"
+        { time: "09:00", activity: "Breakfast & Coffee" },
+        { time: "10:00", activity: "AI/ML Workshop Session" },
+        { time: "11:00", activity: "Development Sprint" },
+        { time: "13:00", activity: "Lunch Break" },
+        { time: "14:00", activity: "Mentorship Rounds" },
+        { time: "16:00", activity: "Technical Check-ins" },
+        { time: "18:00", activity: "Dinner Break" },
+        { time: "20:00", activity: "Final Development Push" }
       ]
     },
     {
       day: "Day 3 - March 3",
-      gradient: "bg-gradient-to-br from-green-500 via-emerald-500 to-lime-500",
       events: [
-        "Final Breakfast",
-        "Project Finalization",
-        "Code Freeze & Submission",
-        "Team Presentations",
-        "Judging & Deliberation",
-        "Awards Ceremony",
-        "Closing & Networking"
+        { time: "09:00", activity: "Final Breakfast" },
+        { time: "10:00", activity: "Project Finalization" },
+        { time: "11:00", activity: "Code Freeze & Submission" },
+        { time: "13:00", activity: "Team Presentations" },
+        { time: "15:00", activity: "Judging & Deliberation" },
+        { time: "17:00", activity: "Awards Ceremony" },
+        { time: "18:00", activity: "Closing & Networking" }
       ]
     }
   ];
@@ -62,36 +59,33 @@ const TimelineSection = () => {
           {schedule.map((day, dayIndex) => (
             <div 
               key={day.day}
-              className="relative overflow-hidden rounded-2xl hover:shadow-2xl transition-all duration-300 animate-fade-in group hover:scale-105"
+              className="bg-gray-800 rounded-2xl p-6 hover:shadow-2xl transition-all duration-300 animate-fade-in"
               style={{animationDelay: `${dayIndex * 0.2}s`}}
             >
-              {/* Gradient Background */}
-              <div className={`${day.gradient} p-6 relative`}>
-                {/* Overlay for better text readability */}
-                <div className="absolute inset-0 bg-black/20"></div>
-                
-                <div className="relative z-10">
-                  <div className="flex items-center justify-center mb-6">
-                    <Calendar className="w-8 h-8 text-white mr-3" />
-                    <h3 className="font-mono font-bold text-xl text-white">
-                      {day.day}
-                    </h3>
+              <div className="flex items-center justify-center mb-6">
+                <Calendar className="w-6 h-6 text-manthan-lavender mr-3" />
+                <h3 className="font-mono font-bold text-xl text-white">
+                  {day.day}
+                </h3>
+              </div>
+              
+              <div className="space-y-4">
+                {day.events.map((event, eventIndex) => (
+                  <div 
+                    key={eventIndex}
+                    className="flex items-start space-x-4"
+                  >
+                    <div className="flex items-center space-x-2 min-w-[80px]">
+                      <Clock className="w-4 h-4 text-manthan-lavender" />
+                      <span className="font-mono text-sm text-manthan-lavender font-medium">
+                        {event.time}
+                      </span>
+                    </div>
+                    <p className="font-sans text-white text-sm leading-relaxed">
+                      {event.activity}
+                    </p>
                   </div>
-                  
-                  <div className="space-y-3">
-                    {day.events.map((event, eventIndex) => (
-                      <div 
-                        key={eventIndex}
-                        className="flex items-start space-x-3 text-left"
-                      >
-                        <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0"></div>
-                        <p className="font-sans text-white leading-relaxed font-medium">
-                          {event}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           ))}
