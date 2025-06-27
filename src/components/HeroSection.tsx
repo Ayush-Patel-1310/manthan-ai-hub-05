@@ -94,9 +94,6 @@ const HeroSection = () => {
                 Register Your Team Now
                 <Zap className="w-6 h-6 ml-3" />
               </Button>
-              <p className="text-lg text-manthan-dark-text/70 mt-4 font-sans">
-                Join 500+ developers already registered
-              </p>
             </div>
           </div>
 

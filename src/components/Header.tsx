@@ -66,7 +66,7 @@ const Header = () => {
               className="bg-manthan-violet hover:bg-manthan-deep-violet text-white font-mono font-semibold px-4 py-2 rounded-lg hover:scale-105 transition-all duration-300"
             >
               <Info className="h-4 w-4 mr-2" />
-             Instructions
+            Instructions
             </Button>
             
             <Button

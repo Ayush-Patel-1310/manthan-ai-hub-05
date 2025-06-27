@@ -96,15 +96,6 @@ const TimelineSection = () => {
             </div>
           ))}
         </div>
-
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center bg-white rounded-full px-8 py-4 border-2 border-manthan-lavender/30 shadow-lg">
-            <Calendar className="w-6 h-6 text-manthan-violet mr-3" />
-            <span className="font-mono font-bold text-manthan-deep-violet text-lg">
-              Total Duration: 48 Hours of Innovation
-            </span>
-          </div>
-        </div>
       </div>
     </section>
   );
