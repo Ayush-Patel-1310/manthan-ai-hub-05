@@ -87,7 +87,7 @@ const AIChallengesSection = () => {
         {/* Section Title */}
         <div className="text-center mb-16">
           <div className="inline-block relative">
-            <h2 className="font-mono font-bold text-5xl lg:text-6xl text-transparent bg-gradient-to-r from-manthan-violet via-manthan-deep-violet to-manthan-violet bg-clip-text mb-6" style="height:70px">
+            <h2 className="font-mono font-bold text-5xl lg:text-6xl text-transparent bg-gradient-to-r from-manthan-violet via-manthan-deep-violet to-manthan-violet bg-clip-text mb-6" style={{height: "70px"}}>
               AI Challenges Track
             </h2>
             <div className="absolute -inset-4 bg-gradient-to-r from-manthan-violet/10 to-manthan-lavender/10 rounded-2xl -z-10 blur-sm"></div>
@@ -170,16 +170,6 @@ const AIChallengesSection = () => {
                           </span>
                         ))}
                       </div>
-                      {/* <div className="flex flex-wrap gap-1">
-                        {challenge.technologies.slice(0, 2).map((tech, idx) => (
-                          <span 
-                            key={idx}
-                            className="font-sans text-xs bg-manthan-lavender/20 text-manthan-deep-violet px-2 py-1 rounded-full border border-manthan-lavender/30"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div> */}
                     </div>
                   </div>
                 </div>
