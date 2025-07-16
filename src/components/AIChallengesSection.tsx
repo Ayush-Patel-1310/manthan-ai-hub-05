@@ -1,78 +1,55 @@
 
 import { useState } from 'react';
-import { Brain, Heart, Shield, Zap, Globe, TrendingUp, ChevronDown, ChevronRight, IndianRupee } from 'lucide-react';
+import { Brain, Heart, Shield, Zap, Globe, TrendingUp, ChevronDown, ChevronRight, IndianRupee, Eye, Users, MapPin, Trophy, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
+import { useProblems, Problem } from '@/hooks/useProblems';
+import { ProblemModal } from './ProblemModal';
 
 const AIChallengesSection = () => {
   const { toast } = useToast();
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const { problems, loading, error } = useProblems();
+  const [selectedProblem, setSelectedProblem] = useState<Problem | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const challenges = [
-    {
-      id: 1,
-      title: "Healthcare AI",
-      category: "Healthcare",
-      difficulty: "Advanced",
-      price: "₹2L",
-      icon: Heart,
-      description: "Develop AI solutions for early disease detection, personalized treatment plans, or mental health support systems.",
-      detailedDescription: "Create innovative AI-powered healthcare solutions that can revolutionize patient care. Focus on developing systems for early disease detection using medical imaging, personalized treatment recommendations based on patient data, or AI chatbots for mental health support.",
-      requirements: [
-        "Medical image processing and computer vision capabilities",
-        "Machine learning model for health data analysis",
-        "User-friendly interface for healthcare professionals",
-        "Accuracy metrics and validation against known cases"
-      ],
-      tools: ["TensorFlow/PyTorch", "OpenCV", "Medical APIs", "Python/R", "Cloud ML Services"],
-      technologies: ["Deep Learning", "Computer Vision", "NLP", "Data Analytics"]
-    },
-    {
-      id: 2,
-      title: "Environmental Intelligence",
-      category: "Environment",
-      difficulty: "Intermediate",
-      price: "₹1.5L",
-      icon: Globe,
-      description: "Create AI models for climate change prediction, waste management optimization, or sustainable resource allocation.",
-      detailedDescription: "Build AI solutions that address environmental challenges and promote sustainability. Develop predictive models for climate patterns, optimize waste management systems using IoT and AI, or create intelligent resource allocation systems for sustainable development.",
-      requirements: [
-        "Time series analysis and forecasting capabilities",
-        "Integration with environmental data sources",
-        "Geospatial analysis and visualization",
-        "Real-time data processing"
-      ],
-      tools: ["Satellite Imagery APIs", "Weather APIs", "GIS Tools", "Time Series Libraries", "IoT Platforms"],
-      technologies: ["Time Series Analysis", "Satellite Imagery", "IoT", "Predictive Analytics"]
-    },
-    {
-      id: 3,
-      title: "Social Impact AI",
-      category: "Social Good",
-      difficulty: "Beginner",
-      price: "₹1L",
-      icon: Brain,
-      description: "Build AI tools for education accessibility, disaster response, or bridging digital divides in underserved communities.",
-      detailedDescription: "Develop AI applications that create positive social impact and address inequality. Create educational tools that adapt to different learning abilities, build disaster response systems that can predict and coordinate relief efforts.",
-      requirements: [
-        "Accessibility-focused design principles",
-        "Multi-language support capabilities",
-        "Offline functionality for low-connectivity areas",
-        "Community feedback integration"
-      ],
-      tools: ["Recommendation Systems", "Chatbot Frameworks", "Mobile Development", "Cloud Services"],
-      technologies: ["Recommendation Systems", "Chatbots", "Mobile AI", "NLP"]
-    }
-  ];
+  const handleViewDetails = (problem: Problem) => {
+    setSelectedProblem(problem);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProblem(null);
+  };
 
   const getDifficultyColor = (difficulty: string) => {
     switch (difficulty) {
-      case 'Beginner': return 'bg-green-100 text-green-800 border-green-200';
-      case 'Intermediate': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'Advanced': return 'bg-red-100 text-red-800 border-red-200';
+      case 'beginner': return 'bg-green-100 text-green-800 border-green-200';
+      case 'intermediate': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'advanced': return 'bg-red-100 text-red-800 border-red-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
     }
   };
+
+  if (loading) {
+    return (
+      <section id="ai-challenges" className="py-20 bg-gradient-to-b from-white via-manthan-lavender/5 to-white">
+        <div className="container mx-auto px-4 text-center">
+          <div className="text-lg text-manthan-dark-text">Loading problems...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section id="ai-challenges" className="py-20 bg-gradient-to-b from-white via-manthan-lavender/5 to-white">
+        <div className="container mx-auto px-4 text-center">
+          <div className="text-lg text-red-600">Error loading problems: {error}</div>
+        </div>
+      </section>
+    );
+  }
 
   const handleProposeAISolution = () => {
     toast({
@@ -97,86 +74,75 @@ const AIChallengesSection = () => {
           </p>
         </div>
 
-        {/* Horizontal Challenge Cards */}
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16">
-          {challenges.map((challenge, index) => (
+        {/* Problem Cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mb-16">
+          {problems.map((problem, index) => (
             <div 
-              key={challenge.id}
-              className="group relative bg-white rounded-3xl border-2 border-manthan-lavender/30 overflow-hidden hover:shadow-2xl transition-all duration-500 animate-fade-in cursor-pointer"
-              style={{animationDelay: `${index * 0.2}s`}}
-              onMouseEnter={() => setHoveredCard(challenge.id)}
-              onMouseLeave={() => setHoveredCard(null)}
+              key={problem.id}
+              className="bg-white rounded-2xl border border-manthan-lavender/30 overflow-hidden hover:shadow-xl transition-all duration-300 animate-fade-in cursor-pointer h-80"
+              style={{animationDelay: `${index * 0.1}s`}}
+              onClick={() => handleViewDetails(problem)}
             >
-              {/* Card Header */}
-              <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-manthan-violet/20 to-manthan-lavender/20 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                    <challenge.icon className="w-6 h-6 text-manthan-violet" />
+              <div className="p-6 h-full flex flex-col">
+                {/* Header */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="w-10 h-10 bg-gradient-to-br from-manthan-violet/20 to-manthan-lavender/20 rounded-xl flex items-center justify-center">
+                    <Brain className="w-5 h-5 text-manthan-violet" />
                   </div>
-                  <div className="text-right">
-                    <div className="flex items-center justify-end text-xl font-mono font-bold text-manthan-violet mb-1">
-                      <IndianRupee className="w-5 h-5 mr-1" />
-                      {challenge.price.replace('₹', '')}
-                    </div>
+                  <div className="flex items-center text-lg font-mono font-bold text-green-600">
+                    <Trophy className="w-4 h-4 mr-1" />
+                    ₹{problem.prize_money.toLocaleString()}
                   </div>
                 </div>
                 
-                <h3 className="font-mono font-bold text-xl text-manthan-deep-violet mb-3">
-                  {challenge.title}
+                {/* Title */}
+                <h3 className="font-mono font-bold text-lg text-manthan-deep-violet mb-3 line-clamp-2">
+                  {problem.title}
                 </h3>
                 
-                <div className="flex items-center space-x-2 mb-4">
-                  <span className="font-sans text-xs font-medium text-manthan-dark-text bg-manthan-lavender/30 px-3 py-1 rounded-full">
-                    {challenge.category}
+                {/* Badges */}
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <span className="font-sans text-xs font-medium text-manthan-dark-text bg-manthan-lavender/30 px-2 py-1 rounded-full">
+                    <MapPin className="w-3 h-3 inline mr-1" />
+                    {problem.domain}
                   </span>
-                  <span className={`font-sans text-xs font-medium px-2 py-1 rounded-full border ${getDifficultyColor(challenge.difficulty)}`}>
-                    {challenge.difficulty}
+                  <span className={`font-sans text-xs font-medium px-2 py-1 rounded-full border ${getDifficultyColor(problem.difficulty)}`}>
+                    <Star className="w-3 h-3 inline mr-1" />
+                    {problem.difficulty.charAt(0).toUpperCase() + problem.difficulty.slice(1)}
                   </span>
                 </div>
                 
-                <p className="font-sans text-manthan-dark-text text-sm leading-relaxed">
-                  {challenge.description}
+                {/* Short Description */}
+                <p className="font-sans text-manthan-dark-text text-sm leading-relaxed flex-grow line-clamp-3 mb-4">
+                  {problem.short_description}
                 </p>
-              </div>
-
-              {/* Expandable Content on Hover */}
-              <div className={`transition-all duration-500 overflow-hidden ${
-                hoveredCard === challenge.id ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-              }`}>
-                <div className="px-6 pb-6 border-t border-manthan-lavender/20 bg-gradient-to-b from-manthan-lavender/5 to-white">
-                  <div className="pt-4 space-y-4">
-                    {/* Detailed Description */}
-                    <div>
-                      <h4 className="font-mono font-bold text-sm text-manthan-deep-violet mb-2">
-                        Overview
-                      </h4>
-                      <p className="font-sans text-xs text-manthan-dark-text leading-relaxed">
-                        {challenge.detailedDescription}
-                      </p>
-                    </div>
-
-                    {/* Tools & Technologies */}
-                    <div>
-                      <h4 className="font-mono font-bold text-sm text-manthan-deep-violet mb-2">
-                        Recommended Tools
-                      </h4>
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {challenge.tools.slice(0, 3).map((tool, idx) => (
-                          <span 
-                            key={idx}
-                            className="font-sans text-xs bg-manthan-violet/10 text-manthan-deep-violet px-2 py-1 rounded-full border border-manthan-violet/20"
-                          >
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
+                
+                {/* Footer */}
+                <div className="flex items-center justify-between mt-auto pt-3 border-t border-manthan-lavender/20">
+                  <div className="flex items-center text-sm text-manthan-dark-text">
+                    <Users className="w-4 h-4 mr-1" />
+                    {problem.available_slots} slots
                   </div>
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    className="text-manthan-violet border-manthan-violet hover:bg-manthan-violet hover:text-white"
+                  >
+                    <Eye className="w-3 h-3 mr-1" />
+                    View More
+                  </Button>
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* Problem Modal */}
+        <ProblemModal 
+          problem={selectedProblem}
+          open={isModalOpen}
+          onClose={closeModal}
+        />
 
         {/* Custom Challenge Section */}
         <div className="text-center">
