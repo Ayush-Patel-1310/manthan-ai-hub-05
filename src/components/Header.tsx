@@ -1,30 +1,31 @@
-
-import { useState } from 'react';
-import { Menu, X, Info } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState } from "react";
+import { Menu, X, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navItems = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Schedule', href: '#schedule' },
-    { name: 'Problems', href: '#problems' },
-    { name: 'Register', href: '#register' },
+    { name: "Home", href: "#home" },
+    { name: "About", href: "#about" },
+    { name: "Problems", href: "#ai-challenges" },
+    { name: "Schedule", href: "#timeline" },
+    { name: "Register", href: "#register" },
   ];
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: "smooth" });
     }
     setIsMenuOpen(false);
   };
 
   const handleInstructionsClick = () => {
     // You can customize this action as needed
-    alert('Instructions: Welcome to Manthan AI Hackathon! Follow the registration steps, choose your AI challenge, and prepare for 48 hours of innovation.');
+    alert(
+      "Instructions: Welcome to Manthan AI Hackathon! Follow the registration steps, choose your AI challenge, and prepare for 48 hours of innovation."
+    );
   };
 
   return (
@@ -66,16 +67,20 @@ const Header = () => {
               className="bg-manthan-violet hover:bg-manthan-deep-violet text-white font-mono font-semibold px-4 py-2 rounded-lg hover:scale-105 transition-all duration-300"
             >
               <Info className="h-4 w-4 mr-2" />
-            Instructions
+              Instructions
             </Button>
-            
+
             <Button
               variant="ghost"
               size="sm"
               className="md:hidden hover:scale-110 transition-transform duration-300"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+              {isMenuOpen ? (
+                <X className="h-5 w-5" />
+              ) : (
+                <Menu className="h-5 w-5" />
+              )}
             </Button>
           </div>
         </div>
@@ -89,7 +94,7 @@ const Header = () => {
                   key={item.name}
                   onClick={() => scrollToSection(item.href)}
                   className="font-sans text-manthan-dark-text hover:text-manthan-violet transition-all duration-300 text-left hover:translate-x-2 animate-fade-in"
-                  style={{animationDelay: `${index * 0.1}s`}}
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   {item.name}
                 </button>
