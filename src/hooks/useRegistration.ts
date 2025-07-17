@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 interface RegistrationData {
   name: string;
   email: string;
-  problem_statement_id: string;
+  problem_statement: string; // Will be updated to problem_statement_id after migration
   proposal_file: File;
 }
 
@@ -42,7 +42,7 @@ export const useRegistration = () => {
         .insert({
           name: data.name,
           email: data.email,
-          problem_statement_id: data.problem_statement_id,
+          problem_statement: data.problem_statement, // Will be updated to problem_statement_id after migration
           proposal: publicUrl
         });
 
