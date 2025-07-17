@@ -6,7 +6,7 @@ import { useToast } from '@/hooks/use-toast';
 interface RegistrationData {
   name: string;
   email: string;
-  problem_statement: string;
+  problem_statement_id: string;
   proposal_file: File;
 }
 
@@ -42,12 +42,25 @@ export const useRegistration = () => {
         .insert({
           name: data.name,
           email: data.email,
-          problem_statement: data.problem_statement,
+          problem_statement_id: data.problem_statement_id,
           proposal: publicUrl
         });
 
       if (insertError) {
         throw new Error(`Database insert failed: ${insertError.message}`);
+      }
+
+      // Send thank you email
+      try {
+        await supabase.functions.invoke('send-thank-you-email', {
+          body: { 
+            name: data.name,
+            email: data.email 
+          }
+        });
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        // Don't fail the registration if email fails
       }
 
       toast({

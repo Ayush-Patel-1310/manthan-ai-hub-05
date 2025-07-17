@@ -6,12 +6,14 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Download, Upload } from 'lucide-react';
 import { useRegistration } from '@/hooks/useRegistration';
+import { useProblems } from '@/hooks/useProblems';
 
 const EnhancedRegistrationSection = () => {
   const { submitRegistration, isSubmitting } = useRegistration();
+  const { problems, loading: problemsLoading } = useProblems();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [problemStatement, setProblemStatement] = useState('');
+  const [problemStatementId, setProblemStatementId] = useState('');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
 
@@ -43,7 +45,7 @@ const EnhancedRegistrationSection = () => {
       newErrors.email = 'Please enter a valid email address';
     }
     
-    if (!problemStatement) {
+    if (!problemStatementId) {
       newErrors.problemStatement = 'Please select a problem statement';
     }
     
@@ -65,7 +67,7 @@ const EnhancedRegistrationSection = () => {
     const result = await submitRegistration({
       name,
       email,
-      problem_statement: problemStatement,
+      problem_statement_id: problemStatementId,
       proposal_file: uploadedFile!
     });
 
@@ -73,7 +75,7 @@ const EnhancedRegistrationSection = () => {
       // Reset form
       setName('');
       setEmail('');
-      setProblemStatement('');
+      setProblemStatementId('');
       setUploadedFile(null);
       setErrors({});
     }
@@ -173,20 +175,22 @@ const EnhancedRegistrationSection = () => {
                   Problem Statement *
                 </Label>
                 <Select 
-                  value={problemStatement} 
+                  value={problemStatementId} 
                   onValueChange={(value) => {
-                    setProblemStatement(value);
+                    setProblemStatementId(value);
                     if (errors.problemStatement) setErrors(prev => ({ ...prev, problemStatement: '' }));
                   }}
+                  disabled={problemsLoading}
                 >
                   <SelectTrigger className={`mt-2 ${errors.problemStatement ? 'border-red-500' : ''}`}>
-                    <SelectValue placeholder="Select a problem statement" />
+                    <SelectValue placeholder={problemsLoading ? "Loading problems..." : "Select a problem statement"} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="healthcare">Healthcare AI</SelectItem>
-                    <SelectItem value="environment">Environmental Intelligence</SelectItem>
-                    <SelectItem value="social">Social Impact AI</SelectItem>
-                    <SelectItem value="custom">Custom AI Challenge</SelectItem>
+                    {problems.map((problem) => (
+                      <SelectItem key={problem.id} value={problem.id}>
+                        {problem.title} - ${problem.prize_money.toLocaleString()} ({problem.difficulty})
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
                 {errors.problemStatement && <p className="text-red-500 text-sm mt-1">{errors.problemStatement}</p>}
