@@ -67,7 +67,7 @@ const EnhancedRegistrationSection = () => {
     const result = await submitRegistration({
       name,
       email,
-      problem_statement: problemStatementId, // Will be updated to problem_statement_id after migration
+      problem_statement_id: problemStatementId,
       proposal_file: uploadedFile!
     });
 

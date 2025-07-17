@@ -59,7 +59,7 @@ export type Database = {
           email: string
           id: number
           name: string
-          problem_statement: string
+          problem_statement_id: string
           proposal: string
         }
         Insert: {
@@ -67,7 +67,7 @@ export type Database = {
           email: string
           id?: number
           name: string
-          problem_statement: string
+          problem_statement_id: string
           proposal: string
         }
         Update: {
@@ -75,10 +75,18 @@ export type Database = {
           email?: string
           id?: number
           name?: string
-          problem_statement?: string
+          problem_statement_id?: string
           proposal?: string
         }
-        Relationships: []
+        Relationships: [
+          {
+            foreignKeyName: "User_Submissions_problem_statement_id_fkey"
+            columns: ["problem_statement_id"]
+            isOneToOne: false
+            referencedRelation: "problems"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
