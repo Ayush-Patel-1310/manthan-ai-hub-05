@@ -89,9 +89,20 @@ export const ProblemModal = ({ problem, open, onClose }: ProblemModalProps) => {
           <div className="flex gap-3 pt-4 border-t">
             <Button 
               size="lg" 
-              className="flex-1 bg-gradient-to-r from-manthan-violet to-manthan-deep-violet hover:from-manthan-deep-violet hover:to-manthan-violet"
+              className="flex-1 bg-gradient-to-r from-manthan-violet to-manthan-deep-violet hover:from-manthan-deep-violet hover:to-manthan-violet disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={problem.available_slots === 0}
+              onClick={() => {
+                onClose();
+                // Scroll to registration section and pass problem ID
+                const registrationSection = document.getElementById('register');
+                if (registrationSection) {
+                  registrationSection.scrollIntoView({ behavior: 'smooth' });
+                  // Dispatch custom event to notify registration component
+                  window.dispatchEvent(new CustomEvent('selectProblem', { detail: problem.id }));
+                }
+              }}
             >
-              Register for This Problem
+              {problem.available_slots === 0 ? 'No Slots Available' : 'Register for This Problem'}
             </Button>
             <Button variant="outline" size="lg" onClick={onClose}>
               Close

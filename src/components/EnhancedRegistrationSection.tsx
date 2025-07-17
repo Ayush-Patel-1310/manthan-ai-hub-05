@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -7,15 +7,32 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Download, Upload } from 'lucide-react';
 import { useRegistration } from '@/hooks/useRegistration';
 import { useProblems } from '@/hooks/useProblems';
+import { supabase } from '@/integrations/supabase/client';
 
 const EnhancedRegistrationSection = () => {
   const { submitRegistration, isSubmitting } = useRegistration();
-  const { problems, loading: problemsLoading } = useProblems();
+  const { problems, loading: problemsLoading, refetchProblems } = useProblems();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [problemStatementId, setProblemStatementId] = useState('');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<{[key: string]: string}>({});
+
+  // Listen for problem selection from modal
+  useEffect(() => {
+    const handleProblemSelection = (event: CustomEvent) => {
+      const selectedProblemId = event.detail;
+      setProblemStatementId(selectedProblemId);
+      if (errors.problemStatement) {
+        setErrors(prev => ({ ...prev, problemStatement: '' }));
+      }
+    };
+
+    window.addEventListener('selectProblem', handleProblemSelection as EventListener);
+    return () => {
+      window.removeEventListener('selectProblem', handleProblemSelection as EventListener);
+    };
+  }, [errors.problemStatement]);
 
   const handleDownloadTemplate = () => {
     const link = document.createElement('a');
@@ -47,6 +64,12 @@ const EnhancedRegistrationSection = () => {
     
     if (!problemStatementId) {
       newErrors.problemStatement = 'Please select a problem statement';
+    } else {
+      // Check if selected problem has available slots
+      const selectedProblem = problems.find(p => p.id === problemStatementId);
+      if (selectedProblem && selectedProblem.available_slots === 0) {
+        newErrors.problemStatement = 'This problem has no available slots';
+      }
     }
     
     if (!uploadedFile) {
@@ -72,6 +95,21 @@ const EnhancedRegistrationSection = () => {
     });
 
     if (result.success) {
+      // Decrease the slot count for the selected problem
+      try {
+        await supabase
+          .from('problems')
+          .update({ 
+            available_slots: problems.find(p => p.id === problemStatementId)!.available_slots - 1 
+          })
+          .eq('id', problemStatementId);
+        
+        // Refresh problems list to show updated slot count
+        refetchProblems();
+      } catch (error) {
+        console.error('Error updating problem slots:', error);
+      }
+      
       // Reset form
       setName('');
       setEmail('');
@@ -187,8 +225,13 @@ const EnhancedRegistrationSection = () => {
                   </SelectTrigger>
                   <SelectContent>
                     {problems.map((problem) => (
-                      <SelectItem key={problem.id} value={problem.id}>
-                        {problem.title} - ${problem.prize_money.toLocaleString()} ({problem.difficulty})
+                      <SelectItem 
+                        key={problem.id} 
+                        value={problem.id}
+                        disabled={problem.available_slots === 0}
+                      >
+                        {problem.title} - ₹{problem.prize_money.toLocaleString()} ({problem.difficulty}) 
+                        {problem.available_slots === 0 ? ' - No Slots Available' : ` - ${problem.available_slots} slots`}
                       </SelectItem>
                     ))}
                   </SelectContent>

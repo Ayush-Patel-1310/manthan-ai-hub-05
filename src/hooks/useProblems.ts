@@ -19,27 +19,31 @@ export const useProblems = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const fetchProblems = async () => {
+    try {
+      setLoading(true);
+      const { data, error } = await supabase
+        .from('problems')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setProblems((data || []) as Problem[]);
+    } catch (err) {
+      console.error('Error fetching problems:', err);
+      setError(err instanceof Error ? err.message : 'An error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchProblems = async () => {
-      try {
-        setLoading(true);
-        const { data, error } = await supabase
-          .from('problems')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        setProblems((data || []) as Problem[]);
-      } catch (err) {
-        console.error('Error fetching problems:', err);
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchProblems();
   }, []);
 
-  return { problems, loading, error };
+  const refetchProblems = () => {
+    fetchProblems();
+  };
+
+  return { problems, loading, error, refetchProblems };
 };
