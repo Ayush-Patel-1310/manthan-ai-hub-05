@@ -35,7 +35,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
             <img 
-              src="/lovable-uploads/aee63895-9a60-4216-b54f-51b688df3313.png" 
+              src="/lovable-uploads/b0666c72-129e-48d4-bc9c-3ee815cd5f49.png" 
               alt="Manthan AI Hackathon Logo" 
               className="h-12 w-auto hover:rotate-12 transition-transform duration-300"
             />
