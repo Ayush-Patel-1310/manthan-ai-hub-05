@@ -34,17 +34,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center space-x-3 hover:scale-105 transition-transform duration-300">
-            <div className="w-12 h-12 bg-gradient-to-br from-manthan-violet via-manthan-deep-violet to-purple-600 rounded-2xl flex items-center justify-center hover:rotate-12 transition-transform duration-300 shadow-lg">
-              <span className="text-white font-mono font-bold text-xl">M</span>
-            </div>
-            <div>
-              <h1 className="font-mono font-bold text-xl text-manthan-deep-violet">
-                Manthan
-              </h1>
-              <p className="text-xs text-manthan-dark-text font-sans">
-                AI Hackathon
-              </p>
-            </div>
+            <img 
+              src="/lovable-uploads/aee63895-9a60-4216-b54f-51b688df3313.png" 
+              alt="Manthan AI Hackathon Logo" 
+              className="h-12 w-auto hover:rotate-12 transition-transform duration-300"
+            />
           </div>
 
           {/* Desktop Navigation */}
